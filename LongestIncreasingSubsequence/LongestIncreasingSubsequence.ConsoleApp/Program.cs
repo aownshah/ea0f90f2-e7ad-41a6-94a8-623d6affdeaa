@@ -13,6 +13,7 @@ var strategy = factory.CreteStrategy();
 
 var result = strategy.Calculate(inputNumbers.ToArray());
 
+Console.WriteLine("Result:");
 Console.WriteLine(string.Join(' ', result));
 
 
