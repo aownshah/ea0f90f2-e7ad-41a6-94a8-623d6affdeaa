@@ -30,3 +30,18 @@ jobs:
 
     - name: Test
       run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+      
+    - name: Install ReportGenerator tool
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
+
+    - name: Create Code Coverage Report
+      run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage" -reporttypes:Html
+      
+    - name: List coverage directory
+      run: ls -al coverage
+
+    - name: Upload coverage report to artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: PortfolioRebalanceWeb/coverage/
