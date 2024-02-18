@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ContainerRepository>longest-increasing-subsequence</ContainerRepository>
+    <ContainerImageTags>latest</ContainerImageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Build.Containers" Version="7.0.406" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LongestIncreasingSubsequence.Core\LongestIncreasingSubsequence.Core.csproj" />
+  </ItemGroup>
+
+</Project>
