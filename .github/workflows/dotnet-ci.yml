@@ -55,7 +55,7 @@ jobs:
         fi
       
     - name: Publish the docker image
-      run: dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
+      run: dotnet publish LongestIncreasingSubsequence.ConsoleApp/LongestIncreasingSubsequence.ConsoleApp.csproj --os linux --arch x64 /t:PublishContainer -c Release
     
     - name: List Docker Images
       run: docker images
