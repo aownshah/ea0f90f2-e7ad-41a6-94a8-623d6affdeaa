@@ -27,3 +27,35 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore   
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+      
+    - name: Install ReportGenerator tool
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
+
+    - name: Create Code Coverage Report
+      run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage" -reporttypes:Html
+      
+    - name: List coverage directory
+      run: ls -al coverage
+
+    - name: Upload coverage report to artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: LongestIncreasingSubsequence/coverage/
+
+    - name: Check code coverage
+      run: |
+        if [[ $(awk -F\' '/<CoverageStatementPercent>/{gsub(/[%]/,""); print $2}' coverage/index.html) -lt 0 ]]
+        then
+            echo "Code coverage is less than 0%"
+            exit 1
+        fi
+      
+    - name: Publish the docker image
+      run: dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
+    
+    - name: List Docker Images
+      run: docker images
