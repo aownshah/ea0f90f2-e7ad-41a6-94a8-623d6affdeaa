@@ -2,6 +2,6 @@
 {
     public interface ILongestIncreasingSubsequenceStrategy
     {
-        IEnumerable<int> Calculate(IEnumerable<int> numbers);
+        IEnumerable<int> Calculate(int[] numbers);
     }
 }

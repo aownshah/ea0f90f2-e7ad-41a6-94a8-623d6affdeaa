@@ -11,6 +11,8 @@ var inputNumbers = inputParser.TryParseInput(inputNumbersString);
 var factory = new LongestIncreasingSubsequenceFactory();
 var strategy = factory.CreteStrategy();
 
-strategy.Calculate(inputNumbers);
+var result = strategy.Calculate(inputNumbers.ToArray());
+
+Console.WriteLine(string.Join(' ', result));
 
 
