@@ -45,3 +45,17 @@ jobs:
       with:
         name: coverage-report
         path: LongestIncreasingSubsequence/coverage/
+
+    - name: Check code coverage
+      run: |
+        if [[ $(awk -F\' '/<CoverageStatementPercent>/{gsub(/[%]/,""); print $2}' coverage/index.html) -lt 0 ]]
+        then
+            echo "Code coverage is less than 0%"
+            exit 1
+        fi
+      
+    - name: Publish the docker image
+      run: dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
+    
+    - name: List Docker Images
+      run: docker images
