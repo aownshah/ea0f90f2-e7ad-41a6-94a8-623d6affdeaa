@@ -12,7 +12,9 @@ public class LongestIncreasingSubsequenceDynamicProgrammingStrategy : ILongestIn
 
         for (int i = (numbers.Length - 1); i >= 0; i--)
         {
-            for (int j = (i + 1); j < numbers.Length; j++)
+            var j = (i + 1);
+
+            if (j < numbers.Length)
             {
                 if (numbers[i] < numbers[j] && (lengths[j] + 1) > lengths[i])
                 {
@@ -21,7 +23,7 @@ public class LongestIncreasingSubsequenceDynamicProgrammingStrategy : ILongestIn
                 }
             }
 
-            if (lengths[i] > maxLength)
+            if (lengths[i] >= maxLength)
             {
                 maxLength = lengths[i];
                 startIndex = i;
